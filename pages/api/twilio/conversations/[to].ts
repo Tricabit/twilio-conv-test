@@ -23,10 +23,12 @@ const getOrCreateConvo = async (req: NextApiRequest, res: NextApiResponse) => {
 
   //connessione DB
   const client = await MongoClient.connect(config.URI, {
+    //@ts-ignore
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
 
+  //@ts-ignore
   const db = client.db(config.USERS_DATABASE);
 
   const existingConversation = await db
@@ -55,6 +57,7 @@ const getOrCreateConvo = async (req: NextApiRequest, res: NextApiResponse) => {
       conv_unique_name: conversationResponse.uniqueName,
     });
 
+    //@ts-ignore
     await client.close();
     return res
       .status(200)
