@@ -11,12 +11,10 @@ const sendMessageToConversation = async (
     if (state === "initialized") {
       try {
         const conversation = await client.getConversationByUniqueName(room);
-        await conversation.join();
         if (message && String(message).trim()) {
           await conversation.sendMessage(message);
         }
       } catch (error) {
-        console.log("error", error);
         toast.error("Unable to create conversation, please reload this page");
       }
     }

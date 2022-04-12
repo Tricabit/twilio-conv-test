@@ -33,16 +33,20 @@ export const createTwilioConversation = async (
 ) => {
   const uniqueName = uuidv4();
 
-  const conversation = (await client.conversations.conversations.create({
-    friendlyName: `Chat created by ${myIdentity}`,
-    uniqueName,
-  })) as TwilioConversationResponse;
+  const conversation = (await client.conversations
+    .services(config.TWILIO_CHAT_SERVICE_SID)
+    .conversations.create({
+      friendlyName: `Chat created by ${myIdentity}`,
+      uniqueName,
+    })) as TwilioConversationResponse;
 
   await client.conversations
+    .services(config.TWILIO_CHAT_SERVICE_SID)
     .conversations(conversation.sid)
     .participants.create({ identity: chatTo });
 
   await client.conversations
+    .services(config.TWILIO_CHAT_SERVICE_SID)
     .conversations(conversation.sid)
     .participants.create({ identity: myIdentity });
 
@@ -55,6 +59,7 @@ export const sendMessage = async (
   body: string
 ) => {
   return await client.conversations
+    .services(config.TWILIO_CHAT_SERVICE_SID)
     .conversations(conversationSid)
     .messages.create({ author, body });
 };
