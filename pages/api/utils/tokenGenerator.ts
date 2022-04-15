@@ -31,6 +31,7 @@ export const tokenGenerator = (identity: string) => {
     // on a given device
     const chatGrant = new ChatGrant({
       serviceSid: config.TWILIO_CHAT_SERVICE_SID,
+      pushCredentialSid: config.TWILIO_FCM_CREDENTIAL_SID,
     });
     token.addGrant(chatGrant);
   }

@@ -1,5 +1,6 @@
 import { Client, State } from "@twilio/conversations";
 import toast from "react-hot-toast";
+import { handleNotifications } from "./messaging_get_token";
 
 const sendMessageToConversation = async (
   token: string,
@@ -14,6 +15,8 @@ const sendMessageToConversation = async (
         if (message && String(message).trim()) {
           await conversation.sendMessage(message);
         }
+
+        handleNotifications(client);
       } catch (error) {
         toast.error("Unable to create conversation, please reload this page");
       }

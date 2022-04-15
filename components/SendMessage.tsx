@@ -29,7 +29,6 @@ const SendMessage: React.FC = () => {
       {
         onSuccess: async ({ room, twilioToken }) => {
           const { messageText } = getMessageText();
-          console.log("messageText", messageText);
           try {
             await conversation.sendMessage(
               twilioToken?.token,
