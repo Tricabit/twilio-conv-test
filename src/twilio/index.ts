@@ -16,7 +16,7 @@ const sendMessageToConversation = async (
           await conversation.sendMessage(message);
         }
 
-        handleNotifications(client);
+        await handleNotifications(client);
       } catch (error) {
         toast.error("Unable to create conversation, please reload this page");
       }
